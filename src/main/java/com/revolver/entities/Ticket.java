@@ -100,7 +100,7 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [id=" + id + ", pizzas=" + pizzas.toString() + ", user=" + user.toString() + ", placementTime=" + placementTime
+		return "Ticket [id=" + id + ", pizzas=" + pizzas + ", user=" + user.getUsername() + ", placementTime=" + placementTime
 				+ ", status=" + status + ", note=" + note + "]";
 	}
 

@@ -30,8 +30,8 @@ public class Pizza {
 	@ManyToMany
 	@JoinTable(
 		name = "pizza_topping",
-		joinColumns = { @JoinColumn(name = "pt_pizza") },
-		inverseJoinColumns = {@JoinColumn(name = "pt_topping") }
+		joinColumns = { @JoinColumn(name = "pizza_id") },
+		inverseJoinColumns = {@JoinColumn(name = "topping_id") }
 	)
 	private Set<Topping> toppings = new HashSet<Topping>();
 
@@ -71,7 +71,7 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		return "Pizza [id=" + id + ", ticket=" + ticket.toString() + ", toppings=" + toppings + "]";
+		return "Pizza [id=" + id + ", ticket=" + ticket.getId() + ", toppings=" + toppings + "]";
 	}
 
 }
