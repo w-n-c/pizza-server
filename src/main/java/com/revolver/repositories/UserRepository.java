@@ -10,4 +10,5 @@ import com.revolver.entities.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 
+	User findByUsernameAndPassword(String username, String password);
 }

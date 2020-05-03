@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -31,6 +33,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private Set<Ticket> tickets = new HashSet<Ticket>();
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "role_id")
 	private Role role;
