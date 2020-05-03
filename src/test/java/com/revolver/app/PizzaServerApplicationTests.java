@@ -41,6 +41,16 @@ class PizzaServerApplicationTests {
 	}
 	
 	@Test
+	void findByUsernameAndPassword() {
+		User test = new User();
+		test.setUsername("newellwm");
+		test.setPassword("password");
+		User actual = ur.findByUsernameAndPassword("newellwm", "password");
+		User expected = ur.findById(1).get();
+		Assertions.assertEquals(actual, expected);
+	}
+
+	@Test
 	void getTicketByUserId() {
 		Set<Ticket> actual = tr.findByUserId(1);
 		Set<Ticket> expected = ur.findById(1).get().getTickets();
