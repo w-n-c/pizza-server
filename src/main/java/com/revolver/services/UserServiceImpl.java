@@ -10,7 +10,7 @@ import com.revolver.repositories.UserRepository;
 @Component
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	UserRepository ur;
 

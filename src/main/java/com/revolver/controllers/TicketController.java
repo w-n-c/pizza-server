@@ -1,5 +1,7 @@
 package com.revolver.controllers;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -9,27 +11,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.revolver.entities.Ticket;
 import com.revolver.entities.User;
-import com.revolver.services.UserService;
+import com.revolver.services.TicketService;
 
 @Component
 @Controller
 @CrossOrigin("*")
-public class UserController {
+public class TicketController {
+	
 	@Autowired 
-	UserService us;
-	
-	@RequestMapping("/users/")
+	TicketService ts;
+
 	@ResponseBody
-	public User getUserByUsernameAndPassword(@RequestBody User user) {
-		User result = us.getUserByUsernameAndPassword(user.getUsername(), user.getPassword());
-		return result;
+	@PostMapping("/tickets")
+	public Ticket createTicket(@RequestBody Ticket ticket) {
+		return ts.createTicket(ticket);
 	}
-	
+
 	@ResponseBody
-	@PostMapping("/users")
-	public User createUser(@RequestBody User user) {
-		return us.createUser(user);
+	@RequestMapping("/tickets")
+	public Set<Ticket> getByUsername(@RequestBody User user) {
+		return ts.findTicketByUsername(user.getUsername());
 	}
-	
+
 }

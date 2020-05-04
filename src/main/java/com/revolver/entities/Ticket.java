@@ -71,7 +71,7 @@ public class Ticket {
 		this.pizzas = pizzas;
 	}
 
-	public User getUser() {
+	public User getUser() { 
 		return user;
 	}
 

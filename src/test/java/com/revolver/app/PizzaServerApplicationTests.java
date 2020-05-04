@@ -16,6 +16,7 @@ import com.revolver.repositories.PizzaRepository;
 import com.revolver.repositories.TicketRepository;
 import com.revolver.repositories.ToppingRepository;
 import com.revolver.repositories.UserRepository;
+import com.revolver.services.TicketService;
 
 @SpringBootTest
 @Transactional
@@ -28,11 +29,42 @@ class PizzaServerApplicationTests {
 	TicketRepository tr;
 	
 	@Autowired
+	TicketService ts;
+	
+	@Autowired
 	PizzaRepository pr;
 	
 	@Autowired
 	ToppingRepository topr;
-
+	
+	@Test
+	void createTicket() {
+		User user = ur.findById(1).get();
+		Ticket order = new Ticket();
+		order.setUser(user);
+		tr.save(order);
+		Assertions.assertTrue(order.getPlacementTime() != null || order.getPlacementTime() != "");
+		Assertions.assertTrue(user.getTickets().contains(order));
+		
+	}
+	
+	@Test
+	void createTicketService() {
+		User user = ur.findById(1).get();
+		Ticket order = new Ticket();
+		order.setUser(user);
+		ts.createTicket(order);
+		Assertions.assertEquals(order.getStatus(), "pending");
+		Assertions.assertTrue(user.getTickets().contains(order));
+	}
+	
+	@Test
+	void findTicketsByUsername() {
+		Set<Ticket> expected = ur.findByUsername("newellwm").getTickets();
+		Set<Ticket> result = ts.findTicketByUsername("newellwm");
+		Assertions.assertEquals(expected, result);
+	}
+	
 	@Test
 	void getUser() {
 		User user = ur.findById(1).get();
