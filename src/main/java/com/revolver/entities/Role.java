@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "user_role")
 public class Role {
@@ -23,6 +26,7 @@ public class Role {
 	@Column(name = "role_title")
 	private String title;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "role")
 	Set<User> users = new HashSet<User>();
 
