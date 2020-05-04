@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revolver.entities.Pizza;
+import com.revolver.entities.Role;
 import com.revolver.entities.Ticket;
 import com.revolver.entities.Topping;
 import com.revolver.entities.User;
@@ -32,7 +33,23 @@ class PizzaServerApplicationTests {
 	
 	@Autowired
 	ToppingRepository topr;
+	
+	@Test
+	void createTicket() {
+		 
+		Ticket Basicorder = new Ticket();
+		User user = ur.findById(1).get();
 
+		Basicorder.setNote("Nothing");
+		Basicorder.setStatus("Done");
+		Basicorder.setUser(user);
+		Basicorder.setPlacementTime(""); 
+		Basicorder.setPizzas(null);
+		
+		System.out.println(Basicorder);		
+		
+	}
+	
 	@Test
 	void getUser() {
 		User user = ur.findById(1).get();
