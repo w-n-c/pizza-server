@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "user_role")
 public class Role {
@@ -19,7 +22,6 @@ public class Role {
 	@Column(name = "role_title")
 	private String title;
 	
-
 	public Role() {
 		super();
 	}

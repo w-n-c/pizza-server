@@ -14,13 +14,14 @@ import com.revolver.services.UserService;
 
 @Component
 @Controller
-@CrossOrigin("*")
+@CrossOrigin
 public class UserController {
 	@Autowired 
 	UserService us;
 	
-	@RequestMapping("/users/")
+	@PostMapping("/users/")
 	@ResponseBody
+	@CrossOrigin
 	public User getUserByUsernameAndPassword(@RequestBody User user) {
 		User result = us.getUserByUsernameAndPassword(user.getUsername(), user.getPassword());
 		return result;
