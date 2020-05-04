@@ -71,10 +71,14 @@ public class Pizza {
 	public void setToppings(Set<Topping> toppings) {
 		this.toppings = toppings;
 	}
+	
+	public void addTopping(Topping topping) {
+		this.toppings.add(topping);
+	}
 
 	@Override
 	public String toString() {
-		return "Pizza [id=" + id + ", ticket=" + ticket.getId() + ", toppings=" + toppings + "]";
+		return "Pizza [id=" + id + ", toppings=" + toppings + "]";
 	}
 
 }

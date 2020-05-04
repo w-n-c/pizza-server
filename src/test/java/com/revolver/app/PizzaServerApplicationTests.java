@@ -104,4 +104,14 @@ class PizzaServerApplicationTests {
 		Assertions.assertEquals(pepperoni.getId(), 2);
 	}
 
+	@Test 
+	void createPizza(){
+		Pizza pizza = new Pizza();
+		Topping cheese = topr.findByName("cheese");
+		Topping pepperoni = topr.findByName("pepperoni");
+		pizza.addTopping(cheese);
+		pizza.addTopping(pepperoni);
+		pr.save(pizza);
+		System.out.println(pizza);
+	}
 }
