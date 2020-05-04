@@ -34,5 +34,4 @@ public class TicketController {
 	public Set<Ticket> getByUsername(@RequestBody User user) {
 		return ts.findTicketByUsername(user.getUsername());
 	}
-
 }
