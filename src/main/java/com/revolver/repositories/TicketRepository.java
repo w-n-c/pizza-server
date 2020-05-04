@@ -12,5 +12,4 @@ import com.revolver.entities.Ticket;
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 	Set<Ticket> findByUserId(int id);
-	Ticket createTicket(Ticket ticket);
 }

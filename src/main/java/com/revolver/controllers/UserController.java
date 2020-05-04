@@ -23,7 +23,6 @@ public class UserController {
 	@ResponseBody
 	public User getUserByUsernameAndPassword(@RequestBody User user) {
 		User result = us.getUserByUsernameAndPassword(user.getUsername(), user.getPassword());
-		System.out.println(result.getId());
 		return result;
 	}
 	
