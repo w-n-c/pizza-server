@@ -30,7 +30,7 @@ public class TicketController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/tickets")
+	@PostMapping("/tickets/")
 	public Set<Ticket> getByUsername(@RequestBody User user) {
 		return ts.findTicketByUsername(user.getUsername());
 	}

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.revolver.entities.Ticket;
+import com.revolver.repositories.PizzaRepository;
 import com.revolver.repositories.TicketRepository;
+import com.revolver.repositories.ToppingRepository;
 import com.revolver.repositories.UserRepository;
 
 @Component
@@ -19,12 +21,19 @@ public class TicketServiceImpl implements TicketService {
 
 	@Autowired
 	UserRepository ur;
+	
+	@Autowired
+	PizzaRepository pr;
+	
+	@Autowired
+	ToppingRepository tor;
 
 	@Override
 	public Ticket createTicket(Ticket ticket) {
 		if (ticket.getStatus() == null) {
 			ticket.setStatus("pending");
 		}
+		System.out.println(ticket.getPizzas());
 		return tr.save(ticket);
 		
 	}
@@ -33,4 +42,6 @@ public class TicketServiceImpl implements TicketService {
 	public Set<Ticket> findTicketByUsername(String username) {
 		return ur.findByUsername(username).getTickets();
 	}
+	
+	
 }

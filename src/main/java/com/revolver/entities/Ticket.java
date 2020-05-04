@@ -3,6 +3,7 @@ package com.revolver.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Ticket {
 	private int id;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "ticket")
+	@OneToMany(mappedBy = "ticket",cascade = CascadeType.ALL)
 	private Set<Pizza> pizzas = new HashSet<Pizza>();
 	
 	@ManyToOne
