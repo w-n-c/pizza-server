@@ -21,33 +21,33 @@ import com.revolver.services.TicketService;
 @SpringBootTest
 @Transactional
 class PizzaServerApplicationTests {
-	
+
 	@Autowired
 	UserRepository ur;
-	
+
 	@Autowired
 	TicketRepository tr;
-	
+
 	@Autowired
 	TicketService ts;
-	
+
 	@Autowired
 	PizzaRepository pr;
-	
+
 	@Autowired
 	ToppingRepository topr;
-	
+
 	@Test
 	void createTicket() {
 		User user = ur.findById(1).get();
 		Ticket order = new Ticket();
 		order.setUser(user);
 		tr.save(order);
-		Assertions.assertTrue(order.getPlacementTime() != null || order.getPlacementTime() != "");
+		Assertions.assertTrue(order.getPlacementTime() != null);
 		Assertions.assertTrue(user.getTickets().contains(order));
-		
+
 	}
-	
+
 	@Test
 	void createTicketService() {
 		User user = ur.findById(1).get();
@@ -57,21 +57,21 @@ class PizzaServerApplicationTests {
 		Assertions.assertEquals(order.getStatus(), "pending");
 		Assertions.assertTrue(user.getTickets().contains(order));
 	}
-	
+
 	@Test
 	void findTicketsByUsername() {
 		Set<Ticket> expected = ur.findByUsername("newellwm").getTickets();
 		Set<Ticket> result = ts.findTicketByUsername("newellwm");
 		Assertions.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	void getUser() {
 		User user = ur.findById(1).get();
 		Assertions.assertTrue(user.getUsername().equals("newellwm"));
 		Assertions.assertTrue(user.getRole().getTitle().equals("employee"));
 	}
-	
+
 	@Test
 	void findByUsernameAndPassword() {
 		User test = new User();
@@ -88,14 +88,14 @@ class PizzaServerApplicationTests {
 		Set<Ticket> expected = ur.findById(1).get().getTickets();
 		Assertions.assertEquals(actual, expected);
 	}
-	
+
 	@Test
 	void getPizzaByTicketId() {
 		Set<Pizza> actual = pr.findByTicketId(1);
 		Set<Pizza> expected = tr.findById(1).get().getPizzas();
 		Assertions.assertEquals(actual, expected);
 	}
-	
+
 	@Test
 	void getToppingsByName() {
 		Topping cheese = topr.findByName("cheese");
@@ -104,8 +104,8 @@ class PizzaServerApplicationTests {
 		Assertions.assertEquals(pepperoni.getId(), 2);
 	}
 
-	@Test 
-	void createPizza(){
+	@Test
+	void createPizza() {
 		Pizza pizza = new Pizza();
 		Topping cheese = topr.findByName("cheese");
 		Topping pepperoni = topr.findByName("pepperoni");

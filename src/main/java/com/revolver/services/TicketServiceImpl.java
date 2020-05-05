@@ -1,5 +1,7 @@
 package com.revolver.services;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,10 @@ public class TicketServiceImpl implements TicketService {
 
 	@Autowired
 	UserRepository ur;
-	
+
 	@Autowired
 	PizzaRepository pr;
-	
+
 	@Autowired
 	ToppingRepository tor;
 
@@ -33,15 +35,18 @@ public class TicketServiceImpl implements TicketService {
 		if (ticket.getStatus() == null) {
 			ticket.setStatus("pending");
 		}
-		System.out.println(ticket.getPizzas());
 		return tr.save(ticket);
-		
+
 	}
 
 	@Override
 	public Set<Ticket> findTicketByUsername(String username) {
 		return ur.findByUsername(username).getTickets();
 	}
-	
-	
+
+	@Override
+	public Set<Ticket> findAllTickets() {
+		return new HashSet<Ticket>((Collection<Ticket>) tr.findAll());
+	}
+
 }

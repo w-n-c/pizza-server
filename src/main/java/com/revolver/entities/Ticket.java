@@ -1,5 +1,6 @@
 package com.revolver.entities;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -24,22 +27,23 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ticket_id")
 	private int id;
-	
+
 	@JsonManagedReference
-	@OneToMany(mappedBy = "ticket",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
 	private Set<Pizza> pizzas = new HashSet<Pizza>();
-	
+
 	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
+	@CreationTimestamp
 	@Column(name = "placement_time")
-	private String placementTime;
-	
+	private LocalDateTime placementTime;
+
 	@Column(name = "status")
 	private String status;
-	
+
 	@Column(name = "note")
 	private String note;
 
@@ -47,7 +51,7 @@ public class Ticket {
 		super();
 	}
 
-	public Ticket(Set<Pizza> pizzas, User user, String placementTime, String status, String note) {
+	public Ticket(Set<Pizza> pizzas, User user, LocalDateTime placementTime, String status, String note) {
 		super();
 		this.pizzas = pizzas;
 		this.user = user;
@@ -72,7 +76,7 @@ public class Ticket {
 		this.pizzas = pizzas;
 	}
 
-	public User getUser() { 
+	public User getUser() {
 		return user;
 	}
 
@@ -80,11 +84,11 @@ public class Ticket {
 		this.user = user;
 	}
 
-	public String getPlacementTime() {
+	public LocalDateTime getPlacementTime() {
 		return placementTime;
 	}
 
-	public void setPlacementTime(String placementTime) {
+	public void setPlacementTime(LocalDateTime placementTime) {
 		this.placementTime = placementTime;
 	}
 
@@ -106,8 +110,8 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [id=" + id + ", pizzas=" + pizzas + ", user=" + user.getUsername() + ", placementTime=" + placementTime
-				+ ", status=" + status + ", note=" + note + "]";
+		return "Ticket [id=" + id + ", pizzas=" + pizzas + ", user=" + user.getUsername() + ", placementTime="
+				+ placementTime + ", status=" + status + ", note=" + note + "]";
 	}
 
 }
