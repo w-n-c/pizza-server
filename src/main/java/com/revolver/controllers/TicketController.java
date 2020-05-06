@@ -40,5 +40,11 @@ public class TicketController {
 	public Set<Ticket> getByUsername(@RequestBody User user) {
 		return ts.findTicketByUsername(user.getUsername());
 	}
+	
+	@ResponseBody
+	@PostMapping("/tickets/{id}")
+	public Ticket updateTicket(@RequestBody Ticket ticket) {
+		return ts.updateTicket(ticket);
+	}
 
 }
