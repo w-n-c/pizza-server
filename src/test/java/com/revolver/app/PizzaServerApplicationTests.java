@@ -45,7 +45,6 @@ class PizzaServerApplicationTests {
 		tr.save(order);
 		Assertions.assertTrue(order.getPlacementTime() != null);
 		Assertions.assertTrue(user.getTickets().contains(order));
-
 	}
 
 	@Test
@@ -88,6 +87,14 @@ class PizzaServerApplicationTests {
 		Set<Ticket> expected = ur.findById(1).get().getTickets();
 		Assertions.assertEquals(actual, expected);
 	}
+	
+	@Test
+	void updateTicket() {
+		Ticket ticket = tr.findById(1).get();
+		ticket.setStatus("a test status");
+		Ticket actual = ts.updateTicket(ticket);
+		Assertions.assertEquals(actual.getStatus(), "a test status");
+	}
 
 	@Test
 	void getPizzaByTicketId() {
@@ -112,6 +119,7 @@ class PizzaServerApplicationTests {
 		pizza.addTopping(cheese);
 		pizza.addTopping(pepperoni);
 		pr.save(pizza);
-		System.out.println(pizza);
+		Assertions.assertTrue(pizza.getId() > 0);
+		Assertions.assertEquals(pizza.getToppings().size(), 2);
 	}
 }

@@ -49,4 +49,9 @@ public class TicketServiceImpl implements TicketService {
 		return new HashSet<Ticket>((Collection<Ticket>) tr.findAll());
 	}
 
+	@Override
+	public Ticket updateTicket(Ticket ticket) {
+		return tr.save(ticket);
+	}
+
 }

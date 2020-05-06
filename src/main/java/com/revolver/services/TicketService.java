@@ -11,5 +11,7 @@ public interface TicketService {
 	Set<Ticket> findTicketByUsername(String username);
 
 	Set<Ticket> findAllTickets();
+	
+	Ticket updateTicket(Ticket ticket);
 
 }
