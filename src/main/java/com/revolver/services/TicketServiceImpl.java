@@ -51,6 +51,8 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Ticket updateTicket(Ticket ticket) {
+		Ticket old = tr.findById(ticket.getId()).get();
+		ticket.setUser(old.getUser());
 		return tr.save(ticket);
 	}
 
