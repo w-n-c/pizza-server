@@ -1,5 +1,6 @@
 package com.revolver.app;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
@@ -121,5 +122,12 @@ class PizzaServerApplicationTests {
 		pr.save(pizza);
 		Assertions.assertTrue(pizza.getId() > 0);
 		Assertions.assertEquals(pizza.getToppings().size(), 2);
+	}
+	
+	@Test
+	void getToppingCount() {
+		// gottem boiz
+		List<List<Integer>> tc = topr.getCount();
+		System.out.println(tc);
 	}
 }
