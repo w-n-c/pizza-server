@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revolver.entities.Topping;
+import com.revolver.entities.ToppingCount;
 import com.revolver.services.ToppingService;
 
 @Component
@@ -24,6 +25,12 @@ public class ToppingController {
 	@GetMapping("/toppings")
 	public List<Topping> getAllToppings() {
 		return toppingService.getAllToppings();
+	}
+	
+	@ResponseBody
+	@GetMapping("/toppings/count")
+	public List<ToppingCount> getToppingCount() {
+		return toppingService.getCount();
 	}
 	
 }
