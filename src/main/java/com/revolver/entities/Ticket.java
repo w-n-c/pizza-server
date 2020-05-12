@@ -110,8 +110,8 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [id=" + id + ", pizzas=" + pizzas + ", user=" + user.getUsername() + ", placementTime="
-				+ placementTime + ", status=" + status + ", note=" + note + "]";
+		return "Ticket [id=" + id + ", pizzas=" + pizzas + ", placementTime=" + placementTime
+				+ ", status=" + status + ", note=" + note + "]";
 	}
 
 }

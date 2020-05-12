@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revolver.entities.Pizza;
@@ -93,7 +94,7 @@ class PizzaServerApplicationTests {
 	void updateTicket() {
 		Ticket ticket = tr.findById(1).get();
 		ticket.setStatus("a test status");
-		Ticket actual = ts.updateTicket(ticket);
+		Ticket actual = ts.updateTicketStatus(ticket);
 		Assertions.assertEquals(actual.getStatus(), "a test status");
 	}
 
@@ -126,8 +127,14 @@ class PizzaServerApplicationTests {
 	
 	@Test
 	void getToppingCount() {
-		// gottem boiz
 		List<List<Integer>> tc = topr.getCount();
 		System.out.println(tc);
+	}
+	
+	@Test
+	void getTicketPage() {
+		Slice<Ticket> slice = ts.findByPage(0);
+		List<Ticket> data = slice.toList();
+		Assertions.assertEquals(data.get(0), tr.findById(1).get());
 	}
 }
