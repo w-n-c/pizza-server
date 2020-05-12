@@ -1,10 +1,11 @@
 package com.revolver.services;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -46,14 +47,19 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Set<Ticket> findAllTickets() {
-		return new HashSet<Ticket>((Collection<Ticket>) tr.findAll());
+		return new HashSet<Ticket>(tr.findAll());
 	}
 
 	@Override
-	public Ticket updateTicket(Ticket ticket) {
-		Ticket old = tr.findById(ticket.getId()).get();
-		ticket.setUser(old.getUser());
+	public Ticket updateTicketStatus(Ticket update) {
+		Ticket ticket = tr.findById(update.getId()).get();
+		ticket.setStatus(update.getStatus());
 		return tr.save(ticket);
+	}
+
+	@Override
+	public Slice<Ticket> findByPage(int page) {
+		return tr.findAll(PageRequest.of(page, 10));
 	}
 
 }

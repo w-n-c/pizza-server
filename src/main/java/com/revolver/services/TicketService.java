@@ -2,6 +2,8 @@ package com.revolver.services;
 
 import java.util.Set;
 
+import org.springframework.data.domain.Slice;
+
 import com.revolver.entities.Ticket;
 
 public interface TicketService {
@@ -12,6 +14,8 @@ public interface TicketService {
 
 	Set<Ticket> findAllTickets();
 	
-	Ticket updateTicket(Ticket ticket);
+	Slice<Ticket> findByPage(int page);
+	
+	Ticket updateTicketStatus(Ticket ticket);
 
 }
